@@ -6,7 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": " next lint",
+    "postinstall": "simple-git-hooks",
+    "preinstall": "npx only-allow pnpm",
+    "commit": "git cz",
+    "release": "bumpp"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": "pnpm run lint",
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@types/node": "18.15.11",
@@ -23,7 +33,19 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "cz-git": "^1.6.1",
+    "lint-staged": "^13.2.1",
+    "simple-git-hooks": "^2.8.1",
     "stylelint": "^15.4.0",
     "stylelint-config-standard-scss": "^7.0.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged",
+    "preserveUnused": true
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
   }
 }
