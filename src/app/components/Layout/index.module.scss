@@ -1,0 +1,22 @@
+.navbar {
+  height: 60px;
+  background-color: rgb(92, 89, 89);
+  border-bottom: 1px solid #1f1f1f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoArea {
+  font-size: 30px;
+  font-weight: bolder;
+  margin-right: 60px;
+}
+
+.linkArea {
+    font-size: 18px;
+    padding: 0 20px;
+    .active {
+      color: pink;
+    }
+}
