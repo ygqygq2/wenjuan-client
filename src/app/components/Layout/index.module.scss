@@ -1,6 +1,6 @@
 .navbar {
   height: 60px;
-  background-color: rgb(92, 89, 89);
+  background-color: #fff;
   border-bottom: 1px solid #1f1f1f;
   display: flex;
   align-items: center;
@@ -14,9 +14,12 @@
 }
 
 .linkArea {
-    font-size: 18px;
-    padding: 0 20px;
-    .active {
-      color: pink;
-    }
+  display: flex;
+  color: #515767;
+  font-size: 18px;
+  padding: 0 20px;
+  .active {
+    background-color: #007fff;
+    color: #fff;
+  }
 }
