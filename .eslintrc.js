@@ -14,7 +14,8 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'jest', 'prettier', 'import', 'unused-imports', 'zhlint'],
   extends: [
-    "next/core-web-vitals", "eslint:recommended",
+    'next/core-web-vitals',
+    'eslint:recommended',
     // airbnb 规范
     // https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb
     'airbnb-base',
@@ -142,6 +143,6 @@ module.exports = {
     ],
   },
   settings: {
-    extensions: ['. ts', '. d.ts', '. cts', '. mts', '. js', '. cjs', 'mjs', '. json'],
+    extensions: ['.ts', '.d.ts', '.cts', '.mts', '.js', '.cjs', '.mjs', '.json'],
   },
 };
