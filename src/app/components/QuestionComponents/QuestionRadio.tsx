@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import styles from './QuestionRadio.module.scss'
+
+import styles from './QuestionRadio.module.scss';
 
 type PropsType = {
   fe_id: string;
@@ -23,7 +24,7 @@ const QuestionRadio: FC<PropsType> = ({ fe_id, props }) => {
 
           // 判断竖向、横向
           let liClassName = '';
-          if(isVertical) {
+          if (isVertical) {
             liClassName = styles.verticalItem;
           } else {
             liClassName = styles.horizontalItem;
