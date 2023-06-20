@@ -37,7 +37,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
   };
 }
 
-export default async function Page({ params }: { params }) {
+export default async function Page({ params }: { params: any }) {
   const questionData = await getData(params.id);
   const { errno, data, msg = '' } = questionData;
   const { id = '', title = '', isDeleted, isPublished, componentList = [] } = data || {};
