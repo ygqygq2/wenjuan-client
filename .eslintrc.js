@@ -134,9 +134,10 @@ module.exports = {
           rules: {
             halfWidthPunctuation: '',
             fullWidthPunctuation: '',
-            unifiedPunctuation: 'simplified',
-            spaceBetweenHalfWidthLetters: false,
-            spaceAfterHalfWidthPunctuation: false,
+            noSpaceBeforePunctuation: undefined,
+            spaceAfterHalfWidthPunctuation: undefined,
+            spaceOutsideHalfBracket: undefined,
+            spaceBetweenMixedWidthLetters: true
           },
         },
       },
