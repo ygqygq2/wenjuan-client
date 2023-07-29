@@ -1,21 +1,28 @@
-'use client';
+import { Inter } from 'next/font/google';
+import React from 'react';
 
-import './styles/globals.css';
+import '@/app/styles/globals.css';
 
-import { Providers } from './providers';
+import StyledComponentsRegistry from '../lib/AntdRegistry';
+
 import Logo from './components/Logo';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body>
-        <Providers>
-          <nav>
-            <Logo></Logo>
-          </nav>
-          {children}
-        </Providers>
-      </body>
-    </html>
-  );
-}
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata = {
+  title: '问卷调查',
+  description: '专业的问卷调查系统',
+};
+
+const RootLayout = ({ children }: { children: React.ReactNode }) => (
+  <html lang="en">
+    <body className={inter.className}>
+      <div className="header">
+        <Logo />
+      </div>
+      <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+    </body>
+  </html>
+);
+
+export default RootLayout;

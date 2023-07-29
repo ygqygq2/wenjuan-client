@@ -1,11 +1,7 @@
-'use client';
-
-import { useSelector } from 'react-redux';
-
-import { StateType } from '@/app/store';
-import { UserStateType } from '@/app/store/userReducer';
+import useUserStore, { UserStoreType } from '@/app/store';
 
 export const useGetUserInfo = () => {
-  const { username, nickname } = useSelector<StateType>((state) => state.user) as UserStateType;
+  const userState = useUserStore((state: UserStoreType) => state.userState);
+  const { username, nickname } = userState;
   return { username, nickname };
 };

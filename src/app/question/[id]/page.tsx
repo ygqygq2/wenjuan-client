@@ -27,7 +27,7 @@ async function getData(id: string): Promise<PropsType> {
   return data;
 }
 
-export async function generateMetadata({ params }): Promise<Metadata> {
+export async function generateMetadata(params: any): Promise<Metadata> {
   const questionData = await getData(params.id);
   const { data } = questionData;
   const metaData = { title: data?.title || '', desc: data?.desc || '' };

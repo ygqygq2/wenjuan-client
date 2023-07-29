@@ -1,3 +1,5 @@
+'use client';
+
 import { FormOutlined } from '@ant-design/icons';
 import { Space, Typography } from 'antd';
 import Link from 'next/link';

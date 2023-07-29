@@ -2,7 +2,7 @@
 
 import { UserAddOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
-import { Button, Checkbox, Form, Input, Space, Typography, message } from 'antd';
+import { Button, Form, Input, Space, Typography, message } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -14,41 +14,27 @@ import { setToken } from '@/app/services/user-token';
 
 import { MANAGE_INDEX_PATHNAME, REGISTER_PATHNAME } from './config/constants';
 import styles from './page.module.scss';
+import { encryptPassword } from './services/encrypt';
 
 const { Title } = Typography;
 
-const USERNAME_KEY = 'USERNAME';
-const PASSWORD_KEY = 'PASSWORD';
-
-function rememberUser(username: string, password: string) {
-  localStorage.setItem(USERNAME_KEY, username);
-  localStorage.setItem(PASSWORD_KEY, password);
-}
-
-function deleteUserFromStorage() {
-  localStorage.removeItem(USERNAME_KEY);
-  localStorage.removeItem(PASSWORD_KEY);
-}
-
-function getUserInfoFromStorage() {
-  return {
-    username: localStorage.getItem(USERNAME_KEY),
-    password: localStorage.getItem(PASSWORD_KEY),
-  };
-}
+const DEFAULT_USERNAME = 'test123';
+const DEFAULT_PASSWORD = '123456';
 
 const Home = () => {
   const router = useRouter();
   const [form] = Form.useForm();
 
   useEffect(() => {
-    const { username, password } = getUserInfoFromStorage();
-    form.setFieldsValue({ username, password });
-  }, [form]);
+    // 设置表单的初始值为默认的演示帐号
+    form.setFieldsValue({ username: DEFAULT_USERNAME, password: DEFAULT_PASSWORD });
+  }, []);
 
   const { run } = useRequest(
     async (username: string, password: string) => {
-      const data = await loginService(username, password);
+      // 使用 CryptoJS 对密码进行加密
+      const hashedPassword = encryptPassword(password);
+      const data = await loginService(username, hashedPassword);
       return data;
     },
     {
@@ -64,15 +50,9 @@ const Home = () => {
   );
 
   const onFinish = (values: any) => {
-    const { username, password, remember } = values || {};
+    const { username, password } = values || {};
 
     run(username, password);
-
-    if (remember) {
-      rememberUser(username, password);
-    } else {
-      deleteUserFromStorage();
-    }
   };
 
   return (
@@ -107,9 +87,6 @@ const Home = () => {
             </Form.Item>
             <Form.Item label="密码" name="password" rules={[{ required: true, message: '请输入密码' }]}>
               <Input.Password />
-            </Form.Item>
-            <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 6, span: 16 }}>
-              <Checkbox>记住我</Checkbox>
             </Form.Item>
             <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
               <Space>

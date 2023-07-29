@@ -3,9 +3,10 @@ import axios from 'axios';
 
 import { getToken } from './user-token';
 
-const HOST = 'http://localhost:3000'; // Mock 的 host
+const HOST = 'https://wenjuan.datcn.com'; // Mock 的 host
 
 const instance = axios.create({
+  baseURL: HOST || '',
   timeout: 10 * 1000,
 });
 
@@ -46,13 +47,13 @@ export type ResDataType = {
 };
 
 export async function get(url: string) {
-  const res = await instance.get(`${HOST}${url}`);
+  const res = await instance.get(`${url}`);
   const { data } = res;
   return data;
 }
 
 export async function post(url: string, body: any) {
-  const res = await instance.post(`${HOST}${url}`, body);
+  const res = await instance.post(`${url}`, body);
   const { data } = res;
   return data;
 }
