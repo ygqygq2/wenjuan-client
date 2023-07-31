@@ -1,11 +1,11 @@
 'use client';
 
 import { FormOutlined } from '@ant-design/icons';
-import { Space, Typography } from 'antd';
+import { ConfigProvider, Space, Typography } from 'antd';
 import Link from 'next/link';
 import React, { FC, useEffect, useState } from 'react';
 
-import { HOME_PATHNAME, MANAGE_INDEX_PATHNAME } from '@/app/config/constants';
+import { HOME_PATHNAME, QUESTION_INDEX_PATHNAME } from '@/app/config/constants';
 import { useGetUserInfo } from '@/app/hooks/useGetUserInfo';
 
 import styles from './Logo.module.scss';
@@ -18,11 +18,11 @@ const Logo: FC = () => {
 
   useEffect(() => {
     if (username) {
-      setPathname(MANAGE_INDEX_PATHNAME);
+      setPathname(QUESTION_INDEX_PATHNAME);
     }
   }, [username]);
   return (
-    <>
+    <ConfigProvider>
       <div className={styles.container}>
         <Link href={pathname}>
           <Space>
@@ -33,7 +33,7 @@ const Logo: FC = () => {
           </Space>
         </Link>
       </div>
-    </>
+    </ConfigProvider>
   );
 };
 
