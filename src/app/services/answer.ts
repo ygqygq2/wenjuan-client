@@ -1,4 +1,4 @@
-import { post } from './ajax';
+import { post } from './client/ajax';
 
 // 提交答卷
 export async function postAnswer(answerInfo: any) {

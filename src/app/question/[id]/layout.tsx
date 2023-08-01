@@ -23,7 +23,6 @@ export default function QuestionLayout({ children, props }: { children: React.Re
       </header>
       <main className={styles.container}>{children}</main>
       <Script id="page-js">{js}</Script>
-      <section>{children}</section>;
     </>
   );
 }

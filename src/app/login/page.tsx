@@ -8,13 +8,13 @@ import { useRouter } from 'next/navigation';
 
 import { useEffect } from 'react';
 
-import { loginService } from '@/app/services/user';
+import { loginService } from '@/app/services/client/user';
 
-import { setToken } from '@/app/services/user-token';
+import { setToken } from '@/app/services/client/user-token';
 
 import { QUESTION_INDEX_PATHNAME, REGISTER_PATHNAME } from '../config/constants';
 
-import { encryptPassword } from '../services/encrypt';
+import { encryptPassword } from '../utils/encrypt';
 
 import styles from './page.module.scss';
 
@@ -43,7 +43,7 @@ const Home = () => {
       manual: true,
       onSuccess(result) {
         const { token = '' } = result;
-        setToken(token); // 存储 token
+        setToken(token); // 客户端存储 token
         message.success('登录成功');
         // 跳转到 MANAGE_INDEX_PATHNAME
         router.push(QUESTION_INDEX_PATHNAME);

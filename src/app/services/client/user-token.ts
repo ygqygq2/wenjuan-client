@@ -1,3 +1,5 @@
+'use client';
+
 import { USER_TOKEN_KEY } from '@/app/config/constants';
 
 export function setToken(token: string) {

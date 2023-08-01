@@ -1,4 +1,4 @@
-import { get } from './ajax';
+import { get } from './client/ajax';
 
 export async function getQuestionById(id: string) {
   const url = `/api/question/${id}`;
