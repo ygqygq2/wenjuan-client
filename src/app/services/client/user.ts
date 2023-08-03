@@ -1,6 +1,7 @@
 import jwt_decode from 'jwt-decode';
 
-import axios, { ResDataType } from './ajax';
+import axios, { ResDataType } from '../ajax';
+
 import { getToken } from './user-token';
 
 type DecodedToken = {

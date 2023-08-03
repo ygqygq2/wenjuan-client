@@ -3,19 +3,25 @@
 import { message } from 'antd';
 import axios from 'axios';
 
-import { getToken } from './user-token';
-
-const HOST = 'https://wenjuan.datcn.com'; // Mock 的 host
+import { getToken } from './client/user-token';
 
 const instance = axios.create({
-  baseURL: HOST || '',
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
   timeout: 10 * 1000,
+  withCredentials: process.env.NODE_ENV !== 'development',
 });
 
 // request 拦截处理 token
 instance.interceptors.request.use(
+  // Adds an authorization header to all requests except those to /auth
+
   (config) => {
-    config.headers.Authorization = `Bearer ${getToken()}`;
+    if (typeof localStorage !== 'undefined') {
+      const token = getToken();
+      if (token && config.url && !config.url.includes('/auth')) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    }
     return config;
   },
   (error) => Promise.reject(error),
