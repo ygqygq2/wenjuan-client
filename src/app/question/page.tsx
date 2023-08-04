@@ -1,12 +1,20 @@
+import { cookies } from 'next/headers';
+
+import axios, { get } from '../services/ajax';
+
 async function getData() {
-  const res = await fetch(`https://${process.env.API_BASE_URL}/api/question`);
-  if (!res.ok) {
-    throw new Error(res.statusText);
-  }
-  return res.json();
+  const data = await get(`/api/question`);
+  return data;
 }
 
 export default async function Page() {
+  const cookiesList = cookies();
+  const tokenCookie = cookiesList.get('auth');
+  if (tokenCookie) {
+    const { value } = tokenCookie;
+    axios.defaults.headers.Authorization = `Bearer ${value}`;
+  }
+
   const data = await getData();
   return (
     <>

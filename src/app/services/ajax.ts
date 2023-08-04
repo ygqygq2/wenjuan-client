@@ -1,14 +1,14 @@
-'use client';
-
 import { message } from 'antd';
 import axios from 'axios';
+
+import { isDev } from '../utils';
 
 import { getToken } from './client/user-token';
 
 const instance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || '',
   timeout: 10 * 1000,
-  withCredentials: process.env.NODE_ENV !== 'development',
+  withCredentials: !isDev(),
 });
 
 // request 拦截处理 token
@@ -16,6 +16,8 @@ instance.interceptors.request.use(
   // Adds an authorization header to all requests except those to /auth
 
   (config) => {
+    // 客户端直接发起的请求，通过 localStorage 处理 token
+    // 否则是 next 服务端发起的请求，通过 cookie 处理 token
     if (typeof localStorage !== 'undefined') {
       const token = getToken();
       if (token && config.url && !config.url.includes('/auth')) {
@@ -55,13 +57,11 @@ export type ResDataType = {
 };
 
 export async function get(url: string) {
-  const res = await instance.get(`${url}`);
-  const { data } = res;
+  const data = await instance.get(`${url}`);
   return data;
 }
 
 export async function post(url: string, body: any) {
-  const res = await instance.post(`${url}`, body);
-  const { data } = res;
+  const data = await instance.post(`${url}`, body);
   return data;
 }

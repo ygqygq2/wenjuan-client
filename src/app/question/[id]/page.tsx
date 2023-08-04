@@ -1,8 +1,7 @@
 import { Metadata } from 'next';
 
-import { getComponent } from '@/app/components/QuestionComponents';
-
-import { getQuestionById } from '@/app/services/question';
+import { getQuestionById } from '@/app/services/server/question';
+import { getComponent } from '@/components/QuestionComponents';
 
 import styles from './page.module.scss';
 

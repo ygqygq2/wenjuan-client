@@ -1,11 +1,10 @@
 import { Inter } from 'next/font/google';
-import React from 'react';
+import React, { Suspense } from 'react';
 
-import '@/app/styles/globals.css';
-
+import Logo from '../components/Logo';
 import StyledComponentsRegistry from '../lib/AntdRegistry';
 
-import Logo from './components/Logo';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +18,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
     <body className={inter.className}>
       <StyledComponentsRegistry>
         <Logo />
-        {children}
+        <Suspense>
+          <main>{children}</main>
+        </Suspense>
       </StyledComponentsRegistry>
     </body>
   </html>
