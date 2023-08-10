@@ -1,3 +1,4 @@
+import { Empty } from 'antd';
 import { cookies } from 'next/headers';
 
 import axios, { get } from '../services/ajax';
@@ -16,9 +17,22 @@ export default async function Page() {
   }
 
   const data = await getData();
+  console.log(typeof data);
+  const { list, total } = data;
   return (
     <>
-      <pre>{data}</pre>
+      <h1>我的问卷回答</h1>
+      {total === 0 ? (
+        <Empty description="暂无数据"></Empty>
+      ) : (
+        <ul>
+          {list.map((answer) => (
+            <li key={answer._id}>
+              <a href={`/survey/${answer.surveyId}/answer/${answer.id}`}>{answer}</a>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }

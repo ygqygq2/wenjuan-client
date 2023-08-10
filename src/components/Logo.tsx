@@ -27,9 +27,9 @@ const Logo: FC = () => {
         <Link href={pathname}>
           <Space>
             <Title>
-              <FormOutlined></FormOutlined>
+              <FormOutlined className={styles.icon}></FormOutlined>
             </Title>
-            <Title>问卷调查</Title>
+            <Title className={styles.title}>问卷调查</Title>
           </Space>
         </Link>
       </div>
