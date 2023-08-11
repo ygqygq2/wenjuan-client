@@ -1,23 +1,13 @@
 .header {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
   padding: 0 24px;
-  height: 64px;
-  padding-inline: 50px;
   color: #fff;
+  height: 64px;
   line-height: 64px;
   background: #001529;
-
-  .left {
-    float: left;
-  }
-
-  .right {
-    float: right;
-  }
-}
-
-.main {
-  min-height: calc(100vh - 64px - 65px);
 }
 
 .footer {
