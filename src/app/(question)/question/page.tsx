@@ -1,12 +1,17 @@
 import { Empty } from 'antd';
 import { cookies } from 'next/headers';
 
-import axios, { get } from '../services/ajax';
+import axios, { get } from '../../services/ajax';
 
 async function getData() {
   const data = await get(`/api/question`);
   return data;
 }
+
+export const metadata = {
+  title: '问卷调查',
+  description: '专业的问卷调查系统',
+};
 
 export default async function Page() {
   const cookiesList = cookies();

@@ -1,14 +1,12 @@
 import { message } from 'antd';
 import axios from 'axios';
 
-import { isDev } from '../utils';
-
 import { getToken } from './client/user-token';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || '',
   timeout: 10 * 1000,
-  withCredentials: !isDev(),
+  withCredentials: true,
 });
 
 // request 拦截处理 token
@@ -23,6 +21,11 @@ instance.interceptors.request.use(
       if (token && config.url && !config.url.includes('/auth')) {
         config.headers.Authorization = `Bearer ${token}`;
       }
+    }
+
+    // 判断是否存在 cookie
+    if (typeof document !== 'undefined' && document.cookie) {
+      config.headers.Cookie = document.cookie;
     }
     return config;
   },
