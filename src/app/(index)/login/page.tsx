@@ -12,9 +12,9 @@ import { loginService } from '@/app/services/client/user';
 
 import { setToken } from '@/app/services/client/user-token';
 
-import { QUESTION_INDEX_PATHNAME, REGISTER_PATHNAME } from '../config/constants';
+import { QUESTION_INDEX_PATHNAME, REGISTER_PATHNAME } from '../../config/constants';
 
-import { encryptPassword } from '../utils';
+import { encryptPassword } from '../../utils';
 
 import styles from './page.module.scss';
 

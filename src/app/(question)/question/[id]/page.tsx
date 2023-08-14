@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import Script from 'next/script';
 
-import axios from '@/app/services/ajax';
 import { getQuestionById } from '@/app/services/server/question';
 import { getComponent } from '@/components/QuestionComponents';
 
@@ -12,30 +11,39 @@ type PropsType = {
   params: { id: string };
 };
 
-async function getData(id: string): Promise<any> {
-  const data = await getQuestionById(id);
-  console.log('🚀 ~ file: page.tsx:25 ~ getData ~ data:', data);
+async function getData(id: string, token: string): Promise<any> {
+  const data = await getQuestionById(id, token);
 
   return data;
 }
 
 export async function generateMetadata({ params }: PropsType): Promise<Metadata> {
-  const data = await getData(params.id);
-  const metaData = { title: data?.title || '', desc: data?.desc || '' };
+  const cookiesList = cookies();
+  const tokenCookie = cookiesList.get('auth');
+  if (tokenCookie) {
+    const { value } = tokenCookie;
+    const data = await getData(params.id, value);
+    const metaData = { title: data?.title || '', desc: data?.desc || '' };
+    return {
+      title: metaData.title,
+      description: metaData.desc,
+    };
+  }
+
   return {
-    title: metaData.title,
-    description: metaData.desc,
+    title: '',
+    description: '',
   };
 }
 
 export default async function Page({ params }: { params: any }) {
   const cookiesList = cookies();
   const tokenCookie = cookiesList.get('auth');
+  let data;
   if (tokenCookie) {
     const { value } = tokenCookie;
-    axios.defaults.headers.Authorization = `Bearer ${value}`;
+    data = await getData(params.id, value);
   }
-  const data = await getData(params.id);
   const { id = '', title = '', isDeleted, isPublished, js, componentList = [] } = data || {};
 
   // 已经被删除的，提示错误

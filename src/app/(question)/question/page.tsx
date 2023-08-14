@@ -1,10 +1,10 @@
 import { Empty } from 'antd';
 import { cookies } from 'next/headers';
 
-import axios, { get } from '../../services/ajax';
+import { get } from '../../services/ajax';
 
-async function getData() {
-  const data = await get(`/api/question`);
+async function getData(token: string) {
+  const data = await get(`/api/question`, token);
   return data;
 }
 
@@ -16,14 +16,13 @@ export const metadata = {
 export default async function Page() {
   const cookiesList = cookies();
   const tokenCookie = cookiesList.get('auth');
+  let data;
   if (tokenCookie) {
     const { value } = tokenCookie;
-    axios.defaults.headers.Authorization = `Bearer ${value}`;
+    data = await getData(value);
+    console.log(data);
   }
-
-  const data = await getData();
-  console.log(typeof data);
-  const { list, total } = data;
+  const { list = [], total = 0 } = data;
   return (
     <>
       <h1>我的问卷回答</h1>

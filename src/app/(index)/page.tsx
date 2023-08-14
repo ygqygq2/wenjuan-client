@@ -3,7 +3,8 @@
 import { Button, ConfigProvider, Typography } from 'antd';
 import { useRouter } from 'next/navigation';
 
-import { QUESTION_INDEX_PATHNAME } from './config/constants';
+import { QUESTION_INDEX_PATHNAME } from '../config/constants';
+
 import styles from './page.module.scss';
 
 const { Title, Paragraph } = Typography;

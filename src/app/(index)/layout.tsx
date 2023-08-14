@@ -3,10 +3,10 @@ import React, { Suspense } from 'react';
 
 import UserInfo from '@/components/UserInfo';
 
-import Logo from '../components/Logo';
-import StyledComponentsRegistry from '../lib/AntdRegistry';
+import Logo from '../../components/Logo';
+import StyledComponentsRegistry from '../../lib/AntdRegistry';
 
-import './globals.css';
+import '../globals.css';
 
 import styles from './layout.module.scss';
 
