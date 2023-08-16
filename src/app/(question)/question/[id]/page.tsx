@@ -69,8 +69,8 @@ export default async function Page({ params }: { params: any }) {
   // 遍历组件
   const ComponentListElem = (
     <>
-      {componentList.map((c: any) => {
-        const ComponentElem = getComponent(c);
+      {componentList.map((c: any, index: number) => {
+        const ComponentElem = getComponent(c, index + 1);
         return (
           <div key={c.fe_id} className={styles.componentWrapper}>
             {ComponentElem}
@@ -82,6 +82,7 @@ export default async function Page({ params }: { params: any }) {
 
   return (
     <>
+      <h1 className={styles.title}>{title}</h1>
       <form method="post" action="/api/answer">
         <input type="hidden" name="questionId" value={id} />
 

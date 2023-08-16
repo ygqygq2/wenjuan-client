@@ -1,5 +1,6 @@
-import styles from '@/app/styles/Common.module.scss';
 import StyledComponentsRegistry from '@/lib/AntdRegistry';
+
+import styles from './layout.module.scss';
 
 export const metadata = {
   title: '问卷调查',
@@ -11,7 +12,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
     <StyledComponentsRegistry>
       <body>
         <main className={styles.container}>{children}</main>
-        {/* <footer className={styles.footer}>问卷调查 &copy;2023 - present. Created by ygqygq2</footer> */}
+        <footer className={styles.footer}>问卷调查 &copy;2023 - present. Created by ygqygq2</footer>
       </body>
     </StyledComponentsRegistry>
   </html>
