@@ -5,7 +5,7 @@ import { ConfigProvider, Space, Typography } from 'antd';
 import Link from 'next/link';
 import React, { FC, useEffect, useState } from 'react';
 
-import { HOME_PATHNAME, QUESTION_INDEX_PATHNAME } from '@/app/config/constants';
+import { HOME_PATHNAME, ANSWER_INDEX_PATHNAME } from '@/app/config/constants';
 import { useGetUserInfo } from '@/app/hooks/useGetUserInfo';
 
 import styles from './Logo.module.scss';
@@ -18,7 +18,7 @@ const Logo: FC = () => {
 
   useEffect(() => {
     if (username) {
-      setPathname(QUESTION_INDEX_PATHNAME);
+      setPathname(ANSWER_INDEX_PATHNAME);
     }
   }, [username]);
   return (

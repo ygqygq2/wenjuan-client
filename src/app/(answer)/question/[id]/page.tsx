@@ -5,8 +5,6 @@ import Script from 'next/script';
 import { getQuestionById } from '@/app/services/server/question';
 import { getComponent } from '@/components/QuestionComponents';
 
-import styles from './page.module.scss';
-
 type PropsType = {
   params: { id: string };
 };
@@ -70,9 +68,9 @@ export default async function Page({ params }: { params: any }) {
   const ComponentListElem = (
     <>
       {componentList.map((c: any, index: number) => {
-        const ComponentElem = getComponent(c, index + 1);
+        const ComponentElem = getComponent(c);
         return (
-          <div key={c.fe_id} className={styles.componentWrapper}>
+          <div key={c.fe_id} className="border-b border-[#f1f1f1]">
             {ComponentElem}
           </div>
         );
@@ -82,14 +80,16 @@ export default async function Page({ params }: { params: any }) {
 
   return (
     <>
-      <h1 className={styles.title}>{title}</h1>
+      <h1 className="text-2xl leading-8 font-semibold text-center text-blue-600">{title}</h1>
       <form method="post" action="/api/answer">
         <input type="hidden" name="questionId" value={id} />
 
         {ComponentListElem}
 
-        <div className={styles.submitBtnContainer}>
-          <button type="submit">提交</button>
+        <div className="text-center m-4">
+          <button type="submit" className="">
+            提交
+          </button>
         </div>
       </form>
       <Script id="page-js">{js}</Script>

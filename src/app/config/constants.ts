@@ -1,7 +1,7 @@
 export const HOME_PATHNAME = '/';
 export const LOGIN_PATHNAME = '/login';
 export const REGISTER_PATHNAME = '/register';
-export const QUESTION_INDEX_PATHNAME = '/question';
+export const ANSWER_INDEX_PATHNAME = '/answer';
 
 export const LIST_PAGE_SIZE = 10; // 默认 pageSize
 export const LIST_SEARCH_PARAM_KEY = 'keyword';

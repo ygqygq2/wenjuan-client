@@ -12,7 +12,7 @@ import { loginService } from '@/app/services/client/user';
 
 import { setToken } from '@/app/services/client/user-token';
 
-import { QUESTION_INDEX_PATHNAME, REGISTER_PATHNAME } from '../../config/constants';
+import { ANSWER_INDEX_PATHNAME, REGISTER_PATHNAME } from '../../config/constants';
 
 import { encryptPassword } from '../../utils';
 
@@ -47,7 +47,7 @@ const Home = () => {
         document.cookie = `auth=${token}`; // 添加 token 到 cookie 中
         message.success('登录成功');
         // 跳转到 MANAGE_INDEX_PATHNAME
-        router.push(QUESTION_INDEX_PATHNAME);
+        router.push(ANSWER_INDEX_PATHNAME);
       },
     },
   );
