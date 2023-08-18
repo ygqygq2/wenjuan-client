@@ -1,7 +1,7 @@
 'use client';
 
 import { UserOutlined } from '@ant-design/icons';
-import { Button, message } from 'antd';
+import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { FC } from 'react';
@@ -20,7 +20,6 @@ const UserInfo: FC = () => {
   function handleLogout() {
     logout();
     removeToken();
-    message.success('退出成功');
     router.push(LOGIN_PATHNAME);
   }
 
@@ -30,7 +29,7 @@ const UserInfo: FC = () => {
         <UserOutlined></UserOutlined>
         {nickname}
       </span>
-      <Button type="link" onClick={handleLogout}>
+      <Button color="secondary" onClick={handleLogout}>
         退出
       </Button>
     </>

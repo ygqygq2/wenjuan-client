@@ -1,4 +1,4 @@
-import StyledComponentsRegistry from '@/lib/AntdRegistry';
+import { Providers } from '@/lib/providers';
 
 import '../globals.css';
 
@@ -9,9 +9,9 @@ export const metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en">
-    <StyledComponentsRegistry>
+    <Providers>
       <body>
-        <main className="h-[calc(100vh)] bg-white">
+        <main style={{ height: `calc(100vh - 64px - 65px)` }} className="bg-white">
           <div>{children}</div>
         </main>
         <footer
@@ -22,7 +22,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
           ygqygq2 提供技术支持
         </footer>
       </body>
-    </StyledComponentsRegistry>
+    </Providers>
   </html>
 );
 

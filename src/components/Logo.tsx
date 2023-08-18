@@ -1,16 +1,12 @@
 'use client';
 
 import { FormOutlined } from '@ant-design/icons';
-import { ConfigProvider, Space, Typography } from 'antd';
+import { Spacer } from '@nextui-org/react';
 import Link from 'next/link';
 import React, { FC, useEffect, useState } from 'react';
 
 import { HOME_PATHNAME, ANSWER_INDEX_PATHNAME } from '@/app/config/constants';
 import { useGetUserInfo } from '@/app/hooks/useGetUserInfo';
-
-import styles from './Logo.module.scss';
-
-const { Title } = Typography;
 
 const Logo: FC = () => {
   const { username } = useGetUserInfo();
@@ -22,18 +18,13 @@ const Logo: FC = () => {
     }
   }, [username]);
   return (
-    <ConfigProvider>
-      <div className={styles.container}>
-        <Link href={pathname}>
-          <Space>
-            <Title>
-              <FormOutlined className={styles.icon}></FormOutlined>
-            </Title>
-            <Title className={styles.title}>问卷调查</Title>
-          </Space>
-        </Link>
-      </div>
-    </ConfigProvider>
+    <div className="flex flex-row items-center w-52 h-16 text-center text-2xl text-gray-100">
+      <Link href={pathname}>
+        <FormOutlined />
+        <Spacer />
+        <h1>问卷调查</h1>
+      </Link>
+    </div>
   );
 };
 

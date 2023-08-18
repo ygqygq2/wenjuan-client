@@ -3,8 +3,9 @@ import React, { Suspense } from 'react';
 
 import UserInfo from '@/components/UserInfo';
 
+import { Providers } from '@/lib/providers';
+
 import Logo from '../../components/Logo';
-import StyledComponentsRegistry from '../../lib/AntdRegistry';
 
 import '../globals.css';
 
@@ -18,9 +19,9 @@ export const metadata = {
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
-  <html lang="en">
+  <html lang="en" className="light">
     <body className={inter.className}>
-      <StyledComponentsRegistry>
+      <Providers>
         <div>
           <div className={styles.header}>
             <div className={styles.left}>
@@ -34,8 +35,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
         <Suspense>
           <main>{children}</main>
         </Suspense>
-      </StyledComponentsRegistry>
-      <footer className={styles.footer}>问卷调查 &copy;2023 - present. Created by ygqygq2</footer>
+      </Providers>
+      <footer className={styles.footer}>问卷调查 - 技术支持 ygqygq2</footer>
     </body>
   </html>
 );

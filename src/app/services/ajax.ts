@@ -1,4 +1,3 @@
-import { message } from 'antd';
 import axios, { AxiosInstance } from 'axios';
 
 import { getToken } from './client/user-token';
@@ -40,7 +39,7 @@ export const createInstance = (): AxiosInstance => {
       const { errno, data, msg } = resData;
       if (errno !== 0) {
         if (msg) {
-          message.error(msg);
+          console.error(msg);
         }
 
         throw new Error(msg);
