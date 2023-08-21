@@ -1,4 +1,3 @@
-import { Empty } from 'antd';
 import { cookies } from 'next/headers';
 
 import { get } from '../../services/ajax';
@@ -39,7 +38,7 @@ export default async function Page() {
     <>
       <h1>我的问卷回答</h1>
       {total === 0 ? (
-        <Empty description="暂无数据"></Empty>
+        <p>暂无数据</p>
       ) : (
         <ul>
           {list.map((answer) => (

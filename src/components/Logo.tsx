@@ -18,11 +18,17 @@ const Logo: FC = () => {
     }
   }, [username]);
   return (
-    <div className="flex flex-row items-center w-52 h-16 text-center text-2xl text-gray-100">
+    <div>
       <Link href={pathname}>
-        <FormOutlined />
-        <Spacer />
-        <h1>问卷调查</h1>
+        <div className="flex flex-row items-center text-[32px] leading-8 text-gray-100 font-semibold">
+          <div className="ml-[16px] mb-[10px] mr-[8px]">
+            <FormOutlined />
+          </div>
+          <Spacer />
+          <div>
+            <h1>问卷调查</h1>
+          </div>
+        </div>
       </Link>
     </div>
   );
