@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import { useState } from 'react';
 
-import { loginService } from '@/app/services/client/user';
+import { loginService, registerService } from '@/app/services/client/user';
 
 import { setToken } from '@/app/services/client/user-token';
 
@@ -17,15 +17,43 @@ import { encryptPassword } from '../../utils';
 const DEFAULT_USERNAME = 'test123';
 const DEFAULT_PASSWORD = '123456';
 
+interface LoginFormState {
+  username: string;
+  password: string;
+}
+
+interface RegisterFormState {
+  username: string;
+  password: string;
+  nickname: string;
+}
+
 const Home = () => {
   const router = useRouter();
-  const [username, setUsername] = useState(DEFAULT_USERNAME);
-  const [password, setPassword] = useState(DEFAULT_PASSWORD);
-  const [selected, setSelected] = useState<string>('login');
+  const [loginFormState, setLoginFormState] = useState<LoginFormState>({
+    username: DEFAULT_USERNAME,
+    password: DEFAULT_PASSWORD,
+  });
+  const [registerFormState, setRegisterFormState] = useState<RegisterFormState>({
+    username: '',
+    password: '',
+    nickname: '',
+  });
+  const [selectedTab, setSelectedTab] = useState<string>('login');
 
-  const { run } = useRequest(
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setFormState: React.Dispatch<React.SetStateAction<any>>,
+    name: string,
+  ) => {
+    const { value } = e.target;
+    setFormState((prevState: any) => ({ ...prevState, [name]: value }));
+  };
+
+  const { run: handleLogin } = useRequest(
     // eslint-disable-next-line @typescript-eslint/no-shadow
-    async (username: string, password: string) => {
+    async (formState: LoginFormState) => {
+      const { username, password } = formState;
       // 使用 CryptoJS 对密码进行加密
       const hashedPassword = encryptPassword(password);
       const data = await loginService(username, hashedPassword);
@@ -43,6 +71,23 @@ const Home = () => {
     },
   );
 
+  const { run: handleRegister } = useRequest(
+    async (formState: RegisterFormState) => {
+      const { username, password, nickname } = formState;
+      // 使用 CryptoJS 对密码进行加密
+      const hashedPassword = encryptPassword(password);
+      const data = await registerService(username, hashedPassword, nickname);
+      return data;
+    },
+    {
+      manual: true,
+      onSuccess(result) {
+        console.log(result);
+        setSelectedTab('login');
+      },
+    },
+  );
+
   return (
     <div
       style={{ height: `calc(100vh - 64px - 65px)` }}
@@ -50,7 +95,13 @@ const Home = () => {
     >
       <Card className="max-w-full w-[340px] h-[400px]">
         <CardBody className="overflow-hidden">
-          <Tabs fullWidth size="md" aria-label="Tabs form" selectedKey={selected} onSelectionChange={setSelected}>
+          <Tabs
+            fullWidth
+            size="md"
+            aria-label="Tabs form"
+            selectedTabKey={selectedTab}
+            onSelectionChange={setSelectedTab}
+          >
             <Tab key="login" title="Login">
               <form className="flex flex-col gap-4">
                 <Input
@@ -58,27 +109,25 @@ const Home = () => {
                   label="Username"
                   placeholder="请输入用户名"
                   type="text"
-                  defaultValue={DEFAULT_USERNAME}
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={loginFormState.username}
+                  onChange={(e) => handleInputChange(e, setLoginFormState, 'username')}
                 />
                 <Input
                   isRequired
                   label="Password"
                   placeholder="请输入密码"
                   type="password"
-                  defaultValue={DEFAULT_PASSWORD}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={loginFormState.password}
+                  onChange={(e) => handleInputChange(e, setLoginFormState, 'password')}
                 />
                 <p className="text-center text-small">
                   需要一个账号？{' '}
-                  <Link size="sm" onPress={() => setSelected('sign-up')}>
+                  <Link size="sm" className="cursor-pointer" onPress={() => setSelectedTab('sign-up')}>
                     注册
                   </Link>
                 </p>
                 <div className="flex gap-2 justify-end">
-                  <Button fullWidth color="primary" onClick={() => run(username, password)}>
+                  <Button fullWidth color="primary" onClick={() => handleLogin(loginFormState)}>
                     登录
                   </Button>
                 </div>
@@ -86,17 +135,38 @@ const Home = () => {
             </Tab>
             <Tab key="sign-up" title="Sign up">
               <form className="flex flex-col gap-4 h-[300px]">
-                <Input isRequired label="Name" placeholder="请输入用户名" type="password" />
-                <Input isRequired label="Nickname" placeholder="请输入昵称" type="text" />
-                <Input isRequired label="Password" placeholder="请输入密码" type="password" />
+                <Input
+                  isRequired
+                  label="Username"
+                  placeholder="请输入用户名"
+                  type="text"
+                  value={registerFormState.username}
+                  onChange={(e) => handleInputChange(e, setRegisterFormState, 'username')}
+                />
+                <Input
+                  isRequired
+                  label="Nickname"
+                  placeholder="请输入昵称"
+                  type="text"
+                  value={registerFormState.nickname}
+                  onChange={(e) => handleInputChange(e, setRegisterFormState, 'nickname')}
+                />
+                <Input
+                  isRequired
+                  label="Password"
+                  placeholder="请输入密码"
+                  type="password"
+                  value={registerFormState.password}
+                  onChange={(e) => handleInputChange(e, setRegisterFormState, 'password')}
+                />
                 <p className="text-center text-small">
                   已有账号？{' '}
-                  <Link size="sm" onPress={() => setSelected('login')}>
+                  <Link size="sm" className="cursor-pointer" onPress={() => setSelectedTab('login')}>
                     登录
                   </Link>
                 </p>
                 <div className="flex gap-2 justify-end">
-                  <Button fullWidth color="primary">
+                  <Button fullWidth color="primary" onClick={() => handleRegister(registerFormState)}>
                     注册
                   </Button>
                 </div>

@@ -43,9 +43,10 @@ export async function getUserInfoService(): Promise<ResDataType> {
  * @returns
  */
 export async function registerService(username: string, password: string, nickname: string): Promise<ResDataType> {
-  const url = '/api/user/register';
+  const url = '/api/auth/register';
   const body = { username, password, nickname: nickname || username };
   const data = (await axios.post(url, body)) as ResDataType;
+  console.log('🚀 ~ file: user.ts:49 ~ registerService ~ body:', body);
   return data;
 }
 

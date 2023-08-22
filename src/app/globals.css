@@ -2,3 +2,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'iconfont'; /* Project id 4219792 */
+  src:
+    url('//at.alicdn.com/t/c/font_4219792_qd2ap4kedpf.woff2?t=1692672333296') format('woff2'),
+    url('//at.alicdn.com/t/c/font_4219792_qd2ap4kedpf.woff?t=1692672333296') format('woff'),
+    url('//at.alicdn.com/t/c/font_4219792_qd2ap4kedpf.ttf?t=1692672333296') format('truetype');
+}
+.iconfont {
+  font-family: 'iconfont' !important;
+  /* font-size: 16px; */
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

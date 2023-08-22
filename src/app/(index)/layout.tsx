@@ -22,17 +22,17 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en" className="light">
     <body className={inter.className}>
       <Providers>
-        <div>
-          <div className={styles.header}>
-            <div className={styles.left}>
-              <Logo></Logo>
-            </div>
-            <div className={styles.right}>
-              <UserInfo />
+        <Suspense>
+          <div>
+            <div className={styles.header}>
+              <div className={styles.left}>
+                <Logo></Logo>
+              </div>
+              <div className={styles.right}>
+                <UserInfo />
+              </div>
             </div>
           </div>
-        </div>
-        <Suspense>
           <main>{children}</main>
         </Suspense>
       </Providers>
