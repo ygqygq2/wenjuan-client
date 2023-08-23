@@ -65,7 +65,6 @@ const Home = () => {
         const { token = '' } = result;
         setToken(token); // 客户端存储 token
         document.cookie = `auth=${token}`; // 添加 token 到 cookie 中
-        // 跳转到 MANAGE_INDEX_PATHNAME
         router.push(ANSWER_INDEX_PATHNAME);
       },
     },
@@ -82,7 +81,6 @@ const Home = () => {
     {
       manual: true,
       onSuccess(result) {
-        console.log(result);
         setSelectedTab('login');
       },
     },

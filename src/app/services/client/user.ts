@@ -20,7 +20,10 @@ export async function getUserInfoService(): Promise<ResDataType> {
   const token = getToken();
   if (!token) {
     // 用户未登录，返回异常
-    return Promise.reject(new Error('用户未登录'));
+    return {
+      errno: 0,
+      msg: '用户未登录',
+    };
   }
   const decodedToken = jwt_decode<DecodedToken>(token);
   const id = decodedToken.sub;
