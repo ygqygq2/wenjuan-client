@@ -3,10 +3,7 @@ import { useEffect } from 'react';
 
 import { LOGIN_PATHNAME, ANSWER_INDEX_PATHNAME, REGISTER_PATHNAME, HOME_PATHNAME } from '@/app/config/constants';
 
-import { useGetUserInfo } from './useGetUserInfo';
-
-function useNavPage(waitingUserData: boolean) {
-  const { username } = useGetUserInfo();
+function useNavPage(waitingUserData: boolean, username: string) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -17,6 +14,7 @@ function useNavPage(waitingUserData: boolean) {
     if (username) {
       if (isLoginOrRegister(pathname)) {
         router.push(ANSWER_INDEX_PATHNAME); // 跳转页面
+        return;
       }
       return;
     }
