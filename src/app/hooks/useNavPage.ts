@@ -1,17 +1,21 @@
+'use client';
+
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { LOGIN_PATHNAME, ANSWER_INDEX_PATHNAME, REGISTER_PATHNAME, HOME_PATHNAME } from '@/app/config/constants';
 
-function useNavPage(waitingUserData: boolean, username: string) {
+import { UserStateType } from '../store';
+
+function useNavPage(userInfo: UserStateType) {
   const pathname = usePathname();
   const router = useRouter();
 
   useEffect(() => {
-    if (waitingUserData) return;
+    if (userInfo.waitingUserData && userInfo.isLogin) return;
 
     // 已经登录
-    if (username) {
+    if (userInfo.isLogin) {
       if (isLoginOrRegister(pathname)) {
         router.push(ANSWER_INDEX_PATHNAME); // 跳转页面
         return;
@@ -27,7 +31,7 @@ function useNavPage(waitingUserData: boolean, username: string) {
     } else {
       router.push(LOGIN_PATHNAME);
     }
-  }, [waitingUserData, username, pathname, router]);
+  }, [userInfo, pathname, router]);
 }
 
 export default useNavPage;

@@ -10,6 +10,8 @@ import { loginService, registerService } from '@/app/services/client/user';
 
 import { setToken } from '@/app/services/client/user-token';
 
+import useUserStore from '@/app/store';
+
 import { ANSWER_INDEX_PATHNAME } from '../../config/constants';
 
 import { encryptPassword } from '../../utils';
@@ -30,6 +32,7 @@ interface RegisterFormState {
 
 const Home = () => {
   const router = useRouter();
+  const { fetchUserData } = useUserStore();
   const [loginFormState, setLoginFormState] = useState<LoginFormState>({
     username: DEFAULT_USERNAME,
     password: DEFAULT_PASSWORD,
@@ -65,6 +68,7 @@ const Home = () => {
         const { token = '' } = result;
         setToken(token); // 客户端存储 token
         document.cookie = `auth=${token}`; // 添加 token 到 cookie 中
+        fetchUserData();
         router.push(ANSWER_INDEX_PATHNAME);
       },
     },

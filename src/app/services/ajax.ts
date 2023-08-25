@@ -67,7 +67,7 @@ export type ResDataType = {
   [key: string]: any;
 };
 
-export async function get(url: string, token: string = '', usePublicInstance = false) {
+export async function get(url: string, token: string = '', params = {}, usePublicInstance = false) {
   const instance = usePublicInstance ? publicInstance : createInstance();
   if (token) {
     instance.interceptors.request.use(
@@ -78,7 +78,7 @@ export async function get(url: string, token: string = '', usePublicInstance = f
       (error) => Promise.reject(error),
     );
   }
-  const data = await instance.get(`${url}`);
+  const data = await instance.get(`${url}`, params);
   return data;
 }
 

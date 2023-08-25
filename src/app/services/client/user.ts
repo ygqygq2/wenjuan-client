@@ -4,13 +4,6 @@ import axios, { ResDataType } from '../ajax';
 
 import { getToken } from './user-token';
 
-type DecodedToken = {
-  sub: number;
-  username: string;
-  iat: number;
-  exp: number;
-};
-
 /**
  * 获取用户信息
  * @returns
@@ -49,7 +42,6 @@ export async function registerService(username: string, password: string, nickna
   const url = '/api/auth/register';
   const body = { username, password, nickname: nickname || username };
   const data = (await axios.post(url, body)) as ResDataType;
-  console.log('🚀 ~ file: user.ts:49 ~ registerService ~ body:', body);
   return data;
 }
 
