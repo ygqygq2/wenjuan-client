@@ -9,7 +9,7 @@ type PropsType = {
   props: {
     title: string;
     isVertical?: boolean;
-    list: Array<{
+    options: Array<{
       value: string;
       text: string;
       checked: boolean;
@@ -18,20 +18,20 @@ type PropsType = {
 };
 
 const QuestionCheckbox: FC<PropsType> = ({ fe_id, props }) => {
-  const { title, isVertical, list = [] } = props;
+  const { title, isVertical, options = [] } = props;
 
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
   // 初始化时，判断默认选中
   useEffect(() => {
-    list.forEach((item) => {
+    options.forEach((item) => {
       const { value, checked } = item;
       if (checked) {
         // eslint-disable-next-line @typescript-eslint/no-shadow
         setSelectedValues((selectedValues) => selectedValues.concat(value));
       }
     });
-  }, [list, selectedValues]);
+  }, [options, selectedValues]);
 
   function toggleChecked(value: string) {
     if (selectedValues.includes(value)) {
@@ -51,7 +51,7 @@ const QuestionCheckbox: FC<PropsType> = ({ fe_id, props }) => {
       <input type="hidden" name={fe_id} value={selectedValues.toString()}></input>
 
       <ul className={styles.list}>
-        {list.map((item) => {
+        {options.map((item) => {
           const { value, text } = item;
           let className;
           if (isVertical) {

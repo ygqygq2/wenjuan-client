@@ -25,10 +25,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
         <Suspense>
           <div>
             <div className={styles.header}>
-              <div className={styles.left}>
+              <div>
                 <Logo></Logo>
               </div>
-              <div className={styles.right}>
+              <div>
                 <UserInfo />
               </div>
             </div>

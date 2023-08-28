@@ -42,7 +42,8 @@ export default async function Page({ params }: { params: any }) {
     const { value } = tokenCookie;
     data = await getData(params.id, value);
   }
-  const { id = '', title = '', isDeleted, isPublished, js, componentList = [] } = data || {};
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { _id = '', title = '', isDeleted, isPublished, js, componentList = [] } = data || {};
 
   // 已经被删除的，提示错误
   if (isDeleted) {
@@ -82,12 +83,12 @@ export default async function Page({ params }: { params: any }) {
     <>
       <h1 className="text-2xl leading-8 font-semibold text-center text-blue-600">{title}</h1>
       <form method="post" action="/api/answer">
-        <input type="hidden" name="questionId" value={id} />
+        <input type="hidden" name="questionId" value={_id} />
 
         {ComponentListElem}
 
         <div className="text-center m-4">
-          <button type="submit" className="">
+          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded">
             提交
           </button>
         </div>
