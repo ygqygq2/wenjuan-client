@@ -101,8 +101,8 @@ const Home = () => {
             fullWidth
             size="md"
             aria-label="Tabs form"
-            selectedTabKey={selectedTab}
-            onSelectionChange={setSelectedTab}
+            selectedKey={selectedTab}
+            onSelectionChange={(key: any) => setSelectedTab(key)}
           >
             <Tab key="login" title="Login">
               <form className="flex flex-col gap-4">

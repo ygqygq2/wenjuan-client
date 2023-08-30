@@ -1,3 +1,10 @@
 export default function Page() {
-  return <div className="h-screen -mt-[64px] -mb-[65px]">问答列表页</div>;
+  return (
+    <div
+      style={{ height: `calc(100vh - 64px - 65px)` }}
+      className="flex justify-center items-center h-[calc(100vh - 64px - 65px)] w-full"
+    >
+      内容
+    </div>
+  );
 }
