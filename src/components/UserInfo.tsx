@@ -46,7 +46,7 @@ const UserInfo: FC = () => {
     }
 
     getData(token);
-  }, []);
+  }, [login]);
 
   const userInfo = useGetUserInfo();
   useNavPage(userInfo);
