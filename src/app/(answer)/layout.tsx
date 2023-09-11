@@ -11,7 +11,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en">
     <Providers>
       <body>
-        <main style={{ height: `calc(100vh - 64px - 65px)` }} className="bg-white">
+        <main style={{ height: `calc(100vh - 65px)` }} className="bg-white">
           <div>{children}</div>
         </main>
         <footer
