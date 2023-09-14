@@ -19,9 +19,9 @@ const Logo: FC = () => {
   return (
     <div>
       <Link href={pathname}>
-        <div className="flex flex-row items-center text-[32px] leading-8 text-gray-100 font-semibold">
-          <div className="ml-[16px] mr-[8px]">
-            <i className="iconfont text-[32px]">&#xe6b3;</i>
+        <div className="flex flex-row items-center sm:text-sm md:text-xl lg:text-3xl text-gray-100 font-semibold">
+          <div className="ml-1 mr-2">
+            <i className="iconfont">&#xe6b3;</i>
           </div>
           <Spacer />
           <div>

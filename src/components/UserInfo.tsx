@@ -58,10 +58,10 @@ const UserInfo: FC = () => {
   }
 
   const UserInfoEl = (
-    <div className="flex items-center justify-center ">
-      <i className="iconfont">&#xe602;</i>
+    <div className="flex items-center justify-center text-sm">
+      <i className="iconfont ">&#xe602;</i>
       <Spacer />
-      <span style={{ color: '#e8e8e8' }}>{userInfo.nickname}</span>
+      <span className="text-[#e8e8e8]">{userInfo.nickname}</span>
       <Spacer />
       <Button color="secondary" onClick={handleLogout}>
         退出
