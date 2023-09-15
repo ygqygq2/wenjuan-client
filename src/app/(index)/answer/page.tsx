@@ -31,7 +31,7 @@ export default async function Page() {
   const { list, total } = data;
 
   return (
-    <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 h-[calc(100vh-129px)] w-full pt-6 px-12">
+    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 h-[calc(100vh-129px)] w-full pt-6 px-12">
       {list.map((item: any, index: number) => {
         const { questionId, createdAt } = item;
         const props = {

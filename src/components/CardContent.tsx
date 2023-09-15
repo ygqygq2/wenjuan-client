@@ -17,7 +17,7 @@ const CardContent: FC<PropsType> = (props: PropsType) => {
 
   return (
     <>
-      <Card className="max-w-[400px] h-[calc(100vh-129px)]">
+      <Card className="h-52 w-52">
         <CardHeader className="flex gap-3">
           <Image alt="nextui logo" height={40} radius="sm" src="./assets/icons/wenjuan.png" width={40} />
           <div className="flex flex-col">
@@ -26,8 +26,9 @@ const CardContent: FC<PropsType> = (props: PropsType) => {
           </div>
         </CardHeader>
         <Divider />
-        <CardBody>
-          <p>回答时间：{createdAtLocal}</p>
+        <CardBody className="text-[15px]">
+          <p>回答时间：</p>
+          <p>{createdAtLocal}</p>
         </CardBody>
         <Divider />
         <CardFooter>
