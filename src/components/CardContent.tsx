@@ -10,7 +10,8 @@ type PropsType = {
 };
 
 const CardContent: FC<PropsType> = (props: PropsType) => {
-  const { questionId, createdAt } = props;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { _id, questionId, createdAt } = props;
   const options = { timeZone: 'Asia/Shanghai' };
   // 将 createdAt 转换成北京时间
   const createdAtLocal = new Date(createdAt).toLocaleString('zh-CN', options);
@@ -32,7 +33,7 @@ const CardContent: FC<PropsType> = (props: PropsType) => {
         </CardBody>
         <Divider />
         <CardFooter>
-          <Link isExternal showAnchorIcon href="https://github.com/nextui-org/nextui">
+          <Link isExternal showAnchorIcon href={`/answer/${_id}`}>
             查看回答
           </Link>
         </CardFooter>
