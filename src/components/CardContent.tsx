@@ -5,6 +5,7 @@ import { Card, CardHeader, CardBody, CardFooter, Divider, Link, Image } from '@n
 import React, { FC } from 'react';
 
 type PropsType = {
+  _id: number;
   questionId: number;
   createdAt: string;
 };
@@ -17,7 +18,7 @@ const CardContent: FC<PropsType> = (props: PropsType) => {
   const createdAtLocal = new Date(createdAt).toLocaleString('zh-CN', options);
 
   return (
-    <>
+    <div className="flex justify-center items-center">
       <Card className="h-52 w-52">
         <CardHeader className="flex gap-3">
           <Image alt="nextui logo" height={40} radius="sm" src="./assets/icons/wenjuan.png" width={40} />
@@ -38,7 +39,7 @@ const CardContent: FC<PropsType> = (props: PropsType) => {
           </Link>
         </CardFooter>
       </Card>
-    </>
+    </div>
   );
 };
 

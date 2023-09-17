@@ -31,8 +31,11 @@ export default async function Page() {
   const { list, total } = data;
 
   return (
-    <>
-      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 overflow-y-auto h-[calc(100vh-300x)] w-full pt-6 px-12">
+    <div className="flex flex-col">
+      <div
+        className="flex-1 grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6
+        w-full pt-6 px-12 pb-[80px]"
+      >
         {list.map((item: any, index: number) => {
           // eslint-disable-next-line @typescript-eslint/naming-convention
           const { _id, questionId, createdAt } = item;
@@ -47,10 +50,10 @@ export default async function Page() {
             </>
           );
         })}
-        <div className="fixed bottom-24 left-1/2 transform -translate-x-1/2">
-          <ListPage total={total}></ListPage>
-        </div>
       </div>
-    </>
+      <div className="fixed bottom-[80px] left-1/2 transform -translate-x-1/2 opacity-80">
+        <ListPage total={total}></ListPage>
+      </div>
+    </div>
   );
 }

@@ -33,7 +33,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
               </div>
             </div>
           </div>
-          <main>{children}</main>
+          <main className="pb-16">{children}</main>
         </Suspense>
       </Providers>
       <footer className={styles.footer}>问卷调查 - 技术支持 ygqygq2</footer>
