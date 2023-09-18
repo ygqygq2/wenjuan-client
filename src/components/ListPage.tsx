@@ -18,29 +18,39 @@ const ListPage: FC<PropsType> = (props: PropsType) => {
   const { createQueryString } = useQueryString();
 
   const { total } = props;
-  const [page, setInitialPage] = useState(1);
+  const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(LIST_PAGE_SIZE);
+  const totalPage = Math.ceil(total / pageSize);
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-shadow
     const page = parseInt(searchParams.get(LIST_PAGE_PARAM_KEY) || '', 10) || 1;
-    setInitialPage(page);
+    setPage(page);
     const paramsPageSize = parseInt(searchParams.get(LIST_PAGE_SIZE_PARAM_KEY) || '', 10) || LIST_PAGE_SIZE;
     setPageSize(paramsPageSize);
   }, [searchParams]);
 
   // eslint-disable-next-line @typescript-eslint/no-shadow
   function handlePageChange(page: number, pageSize: number): void {
+    console.log(`${createQueryString(LIST_PAGE_PARAM_KEY, page.toString())}`);
     const queryString = `${createQueryString(LIST_PAGE_PARAM_KEY, page.toString())}&${createQueryString(
       LIST_PAGE_SIZE_PARAM_KEY,
       pageSize.toString(),
     )}`;
+    console.log('🚀 ~ file: ListPage.tsx:41 ~ handlePageChange ~ pathname:', pathname);
+    console.log('🚀 ~ file: ListPage.tsx:39 ~ queryString ~ queryString:', queryString);
     const url = `${pathname}?${queryString}`;
     router.push(url);
   }
   return (
     <>
-      <Pagination showControls page={page} total={total} onChange={() => handlePageChange(page, pageSize)}></Pagination>
+      <Pagination
+        showControls
+        page={page}
+        total={totalPage}
+        // eslint-disable-next-line @typescript-eslint/no-shadow
+        onChange={(page) => handlePageChange(page, pageSize)}
+      ></Pagination>
     </>
   );
 };
