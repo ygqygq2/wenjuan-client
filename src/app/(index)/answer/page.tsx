@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { getAnswers } from '@/app/services/server/answer';
 import CardContent from '@/components/CardContent';
 import ListPage from '@/components/ListPage';
+import ListSearch from '@/components/ListSearch';
 
 type DataType = {
   list: any[];
@@ -32,6 +33,14 @@ export default async function Page() {
 
   return (
     <div className="flex flex-col">
+      <div className="flex pt-3 px-12 justify-items-center">
+        <div className="w-3/4">
+          <h3 className="text-2xl font-bold">我的回答</h3>
+        </div>
+        <div className="w-1/4 text-right">
+          <ListSearch />
+        </div>
+      </div>
       <div
         className="flex-1 grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6
         w-full pt-6 px-12 pb-[80px]"

@@ -1,3 +1,5 @@
+'use client';
+
 import SearchIcon from '@material-ui/icons/Search';
 import { Input } from '@nextui-org/react';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
@@ -32,7 +34,7 @@ const ListSearch: FC = () => {
   return (
     <form onSubmit={handleSearch}>
       <Input
-        label="Search"
+        label=""
         isClearable
         radius="lg"
         classNames={{
@@ -56,12 +58,13 @@ const ListSearch: FC = () => {
             '!cursor-text',
           ],
         }}
-        placeholder="输入关键字"
+        placeholder="输入关键字回车搜索"
         startContent={
           <SearchIcon className="text-black/50 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
         }
         value={value}
         onChange={handleChange}
+        onClear={() => setValue('')}
         style={{ width: '260px' }}
       ></Input>
     </form>
