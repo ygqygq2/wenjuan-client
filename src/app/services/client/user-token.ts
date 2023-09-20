@@ -2,16 +2,29 @@ import jwt_decode from 'jwt-decode';
 
 import { USER_TOKEN_KEY } from '@/app/config/constants';
 
+let localStorageAvailable = false;
+
+if (typeof window !== 'undefined') {
+  localStorageAvailable = true;
+}
+
 export function setToken(token: string) {
-  localStorage.setItem(USER_TOKEN_KEY, token);
+  if (localStorageAvailable) {
+    localStorage.setItem(USER_TOKEN_KEY, token);
+  }
 }
 
 export function getToken() {
-  return localStorage.getItem(USER_TOKEN_KEY) || '';
+  if (localStorageAvailable) {
+    return localStorage.getItem(USER_TOKEN_KEY) || '';
+  }
+  return '';
 }
 
 export function removeToken() {
-  localStorage.removeItem(USER_TOKEN_KEY);
+  if (localStorageAvailable) {
+    localStorage.removeItem(USER_TOKEN_KEY);
+  }
 }
 
 export function isTokenExpired(token: string) {

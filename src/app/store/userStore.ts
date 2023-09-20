@@ -1,3 +1,5 @@
+'use client';
+
 import { create } from 'zustand';
 
 // import {setUserInfo} from '@/app/services/client/user-info';
