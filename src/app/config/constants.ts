@@ -3,7 +3,7 @@ export const LOGIN_PATHNAME = '/login';
 export const REGISTER_PATHNAME = '/register';
 export const ANSWER_INDEX_PATHNAME = '/answer';
 
-export const LIST_PAGE_SIZE = 2; // 默认 pageSize
+export const LIST_PAGE_SIZE = 10; // 默认 pageSize
 export const LIST_SEARCH_PARAM_KEY = 'keyword';
 export const LIST_PAGE_PARAM_KEY = 'page';
 export const LIST_PAGE_SIZE_PARAM_KEY = 'pageSize';
