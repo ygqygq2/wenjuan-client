@@ -16,7 +16,7 @@ export const createInstance = (): AxiosInstance => {
     (config) => {
       // 客户端直接发起的请求，通过 localStorage 处理 token
       // 否则是 next 服务端发起的请求，通过 cookie 处理 token
-      if (typeof localStorage !== 'undefined') {
+      if (typeof window !== 'undefined') {
         const token = getToken();
         if (token && config.url && !config.url.includes('/auth')) {
           config.headers.Authorization = `Bearer ${token}`;

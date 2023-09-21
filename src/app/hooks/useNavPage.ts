@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { LOGIN_PATHNAME, ANSWER_INDEX_PATHNAME, REGISTER_PATHNAME, HOME_PATHNAME } from '@/app/config/constants';
@@ -10,6 +10,7 @@ import { UserStateType } from '../store';
 function useNavPage(userInfo: UserStateType) {
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (userInfo.waitingUserData && userInfo.isLogin) return;
@@ -17,7 +18,8 @@ function useNavPage(userInfo: UserStateType) {
     // 已经登录
     if (userInfo.isLogin) {
       if (isLoginOrRegister(pathname)) {
-        router.push(ANSWER_INDEX_PATHNAME); // 跳转页面
+        const url = `${ANSWER_INDEX_PATHNAME}?${searchParams}`;
+        router.push(url); // 跳转页面
         return;
       }
       return;
@@ -29,9 +31,10 @@ function useNavPage(userInfo: UserStateType) {
       // console.log('不需要用户信息');
       // 什么都不干
     } else {
-      router.push(LOGIN_PATHNAME);
+      window.location.href = LOGIN_PATHNAME;
+      // router.push(LOGIN_PATHNAME);
     }
-  }, [userInfo, pathname, router]);
+  }, [userInfo, pathname, searchParams, router]);
 }
 
 export default useNavPage;

@@ -17,6 +17,9 @@ const UserInfo: FC = () => {
   const router = useRouter();
   const { login, logout } = useUserStore();
 
+  const userInfo = useGetUserInfo();
+  useNavPage(userInfo);
+
   useEffect(() => {
     const token = getToken();
 
@@ -46,14 +49,12 @@ const UserInfo: FC = () => {
     }
 
     getData(token);
-  }, [login]);
-
-  const userInfo = useGetUserInfo();
-  useNavPage(userInfo);
+  }, []);
 
   function handleLogout() {
     logout();
     removeToken();
+    document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     router.push(LOGIN_PATHNAME);
   }
 
