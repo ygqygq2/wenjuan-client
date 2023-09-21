@@ -78,7 +78,10 @@ export async function get(url: string, token: string = '', params = {}, usePubli
       (error) => Promise.reject(error),
     );
   }
-  const data = await instance.get(`${url}`, params);
+  // const searchParams = new URLSearchParams(params);
+  // const queryString = searchParams.toString();
+  // const data = await instance.get(`${url}?${queryString}`, params);
+  const data = await instance.get(`${url}`, { params });
   return data;
 }
 

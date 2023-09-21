@@ -4,3 +4,5 @@ declare type DecodedToken = {
   iat: number;
   exp: number;
 };
+
+declare type SearchParamsType = { [key: string]: string | string[] | undefined };

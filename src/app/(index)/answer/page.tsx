@@ -1,5 +1,7 @@
 import { cookies } from 'next/headers';
 
+import React from 'react';
+
 import { getAnswers } from '@/app/services/server/answer';
 import CardContent from '@/components/CardContent';
 import ListPage from '@/components/ListPage';
@@ -10,13 +12,17 @@ type DataType = {
   total: number;
 };
 
-async function getData(token: string): Promise<any> {
-  const data = await getAnswers(token);
+async function getData(token: string, searchParams: SearchParamsType): Promise<any> {
+  const data = await getAnswers(token, searchParams);
 
   return data;
 }
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const cookiesList = cookies();
   const tokenCookie = cookiesList.get('auth');
   const data: DataType = {
@@ -25,7 +31,7 @@ export default async function Page() {
   };
   if (tokenCookie) {
     const { value } = tokenCookie;
-    const result = await getData(value);
+    const result = await getData(value, searchParams);
     data.list = result.list;
     data.total = parseInt(result.total, 10);
   }
@@ -54,9 +60,9 @@ export default async function Page() {
             createdAt,
           };
           return (
-            <>
-              <CardContent key={index} {...props}></CardContent>
-            </>
+            <React.Fragment key={index}>
+              <CardContent {...props}></CardContent>
+            </React.Fragment>
           );
         })}
       </div>
