@@ -1,4 +1,8 @@
+'use client';
+
 import React, { FC } from 'react';
+
+import { useReadonly } from '@/lib/readonly-provider';
 
 import styles from './QuestionRadio.module.scss';
 
@@ -14,6 +18,7 @@ type PropsType = {
 
 const QuestionRadio: FC<PropsType> = ({ fe_id, props }) => {
   const { title, options = [], value, isVertical } = props;
+  const readonly = useReadonly();
 
   return (
     <>
@@ -33,7 +38,7 @@ const QuestionRadio: FC<PropsType> = ({ fe_id, props }) => {
           return (
             <li key={val} className={liClassName}>
               <label>
-                <input type="radio" name={fe_id} value={val} defaultChecked={val === value}></input>
+                <input type="radio" name={fe_id} value={val} defaultChecked={val === value} disabled={readonly}></input>
                 {text}
               </label>
             </li>

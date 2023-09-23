@@ -2,6 +2,8 @@
 
 import React, { FC, useEffect, useState } from 'react';
 
+import { useReadonly } from '@/lib/readonly-provider';
+
 import styles from './QuestionCheckbox.module.scss';
 
 type PropsType = {
@@ -19,6 +21,7 @@ type PropsType = {
 
 const QuestionCheckbox: FC<PropsType> = ({ fe_id, props }) => {
   const { title, isVertical, options = [] } = props;
+  const readonly = useReadonly();
 
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
@@ -48,7 +51,7 @@ const QuestionCheckbox: FC<PropsType> = ({ fe_id, props }) => {
     <>
       <p>{title}</p>
 
-      <input type="hidden" name={fe_id} value={selectedValues.toString()}></input>
+      <input type="hidden" name={fe_id} value={selectedValues.toString()} readOnly={readonly}></input>
 
       <ul className={styles.list}>
         {options.map((item) => {
@@ -66,6 +69,7 @@ const QuestionCheckbox: FC<PropsType> = ({ fe_id, props }) => {
                   type="checkbox"
                   checked={selectedValues.includes(value)}
                   onChange={() => toggleChecked(value)}
+                  disabled={readonly}
                 ></input>
                 {text}
               </label>
