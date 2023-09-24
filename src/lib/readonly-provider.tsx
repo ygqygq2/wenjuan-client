@@ -15,4 +15,11 @@ export const ReadonlyProvider: React.FC<ReadonlyProviderProps> = ({ children, re
   <ReadonlyContext.Provider value={readonly}>{children}</ReadonlyContext.Provider>
 );
 
-export const useReadonly = (): ReadonlyContextValue => useContext(ReadonlyContext);
+export const useReadonly = (): ReadonlyContextValue => {
+  const readonlyValue = useContext(ReadonlyContext);
+  if (readonlyValue === undefined) {
+    // 如果没有提供 ReadonlyProvider，则返回默认值
+    return false; // 或者根据您的需求返回其他默认值
+  }
+  return readonlyValue;
+};
