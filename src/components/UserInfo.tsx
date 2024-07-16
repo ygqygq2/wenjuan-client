@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, Spacer } from '@nextui-org/react';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { FC, useEffect } from 'react';
@@ -9,7 +9,7 @@ import React, { FC, useEffect } from 'react';
 import { LOGIN_PATHNAME } from '@/app/config/constants';
 import { useGetUserInfo } from '@/app/hooks/useGetUserInfo';
 import useNavPage from '@/app/hooks/useNavPage';
-import { ResDataType, get } from '@/app/services/ajax';
+import { get, ResDataType } from '@/app/services/ajax';
 import { getToken, removeToken } from '@/app/services/client/user-token';
 import useUserStore from '@/app/store/userStore';
 
@@ -23,10 +23,9 @@ const UserInfo: FC = () => {
   useEffect(() => {
     const token = getToken();
 
-    // eslint-disable-next-line @typescript-eslint/no-shadow
     async function getData(token: string) {
       if (!token) return;
-      const decodedToken = jwt_decode<DecodedToken>(token);
+      const decodedToken = jwtDecode<DecodedToken>(token);
       const id = decodedToken.sub;
       const { username } = decodedToken;
       const url = `/api/user/profile?id=${id}&username=${username}`;

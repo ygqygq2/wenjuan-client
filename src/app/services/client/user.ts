@@ -1,7 +1,6 @@
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 import axios, { ResDataType } from '../ajax';
-
 import { getToken } from './user-token';
 
 /**
@@ -18,7 +17,7 @@ export async function getUserInfoService(): Promise<ResDataType> {
       msg: '用户未登录',
     };
   }
-  const decodedToken = jwt_decode<DecodedToken>(token);
+  const decodedToken: { sub: string; username: string } = jwtDecode(token);
   const id = decodedToken.sub;
   const { username } = decodedToken;
   const url = '/api/user/profile';

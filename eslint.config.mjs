@@ -1,7 +1,7 @@
-import react from '@ygqygq2/eslint-config/react.mjs';
+import next from '@ygqygq2/eslint-config/next.mjs';
 import tseslint from 'typescript-eslint';
 
-export default tseslint.config(...react, {
+export default tseslint.config(...next, {
   ignores: ['*.cjs'],
   rules: {},
 });

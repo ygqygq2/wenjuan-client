@@ -1,4 +1,4 @@
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 import { USER_TOKEN_KEY } from '@/app/config/constants';
 
@@ -31,7 +31,7 @@ export function isTokenExpired(token: string) {
   if (!token) {
     return true; // 令牌为空，表示已过期
   }
-  const decodedToken = jwt_decode<DecodedToken>(token);
+  const decodedToken = jwtDecode<DecodedToken>(token);
   const expirationTime = decodedToken.exp * 1000; // 将过期时间转换为毫秒
 
   return Date.now() > expirationTime; // 检查当前时间是否晚于过期时间
